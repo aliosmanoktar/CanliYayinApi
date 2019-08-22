@@ -2,6 +2,7 @@ using System.Web.Http;
 using WebActivatorEx;
 using CanliYayinApi;
 using Swashbuckle.Application;
+using System.Diagnostics;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -11,8 +12,8 @@ namespace CanliYayinApi
     {
         public static void Register()
         {
+#if DEBUG
             var thisAssembly = typeof(SwaggerConfig).Assembly;
-
             GlobalConfiguration.Configuration
                 .EnableSwagger(c =>
                     {
@@ -250,6 +251,7 @@ namespace CanliYayinApi
                         //
                         //c.EnableApiKeySupport("apiKey", "header");
                     });
+#endif
         }
     }
 }
